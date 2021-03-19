@@ -1,0 +1,12 @@
+CACHE MANIFEST
+
+CACHE:
+index.html
+resultados.html
+../modernizr-3.8.0.min.js
+../jquery.js
+logotipo_offline.png
+
+
+FALLBACK:
+logotipo.png logotipo_offline.png

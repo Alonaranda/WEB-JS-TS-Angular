@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Geolocalizacion</title>
+</head>
+<body>
+    <h2>Deteccion de Geolocalización</h2>
+    <div id="resultado">
+        
+    </div>
+
+    <h2>Monitoreo de la ubicación del usuario</h2>
+    <div id="resultadoUbicacion">
+
+    </div>
+
+    <h2>Mostrar en Mapa</h2>
+    <div id="resultadoMapa">
+
+    </div>
+
+    
+    <script src="./modernizr-3.8.0.min.js"></script>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        console.log('JS corriendo');
+
+        //Detección
+        navigator.geolocation.getCurrentPosition(mostrarCoordenadas);
+        function mostrarCoordenadas(posicion){
+            let latitud = posicion.coords.latitude;
+            let longitud = posicion.coords.longitude;
+            $("#resultado").append("<p> Latitud: " + latitud + "</p>");
+            $("#resultado").append("<p> Longitud: " + longitud + "</p>");
+        }
+
+        //Ubicacion actual
+        navigator.geolocation.watchPosition(mostrarUbicacion, mostrarError, {
+            maximumAge: 1000, timeout:30000, enableHighAccuracy:true
+        });
+
+        function mostrarUbicacion(posicion){
+            let latitud = posicion.coords.latitude;
+            let longitud = posicion.coords.longitude;
+            $("#resultadoUbicacion").append("<p> Latitud: " + latitud + "</p>");
+            $("#resultadoUbicacion").append("<p> Longitud: " + longitud + "</p>");
+        }
+
+        function mostrarError(){
+            switch(error.code){
+                case error.PERMISSION_DENIED:
+                    alert("Permiso denegado");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("No se pudo recuperar la posicion");
+                    break;
+                case error.TIMEOUT:
+                    alert("Tiempo de espera agotado");
+                    break;
+                default:
+                    alert("Otro error");
+                    break;
+            }
+        }
+
+        //Mostrar en Mapa
+        let mapa = null;
+        let mapaMarcador = null;
+        navigator.geolocation.watchPosition(mostrarMapa, mostrarError, {
+            maximumAge: 1000, timeout:30000, enableHighAccuracy:true
+        });
+
+        function mostrarMapa(posicion){
+            let latitud = posicion.coords.latitude;
+            let longitud = posicion.coords.longitude;
+            let gmPosicion = new google.maps.LatLng(latitud, longitud);
+
+            if(mapa == null){
+                let opciones = {
+                    center: gmPosicion, zoom:15, mapTypeId: google.amps.MApTypeId.ROADMAP};
+                    mapa = new google.maps.Map(document.getElementById("resultadoMapa"),opciones);
+                    mapaMarcador = new google.maps.Marker({posicion: gmPosicion, title:"Here"});
+                    mapaMarcador.setMap(mapa);
+            }else{
+                mapa.panTo(gmPosicion);
+                mapaMarcador.setPosition(gmPosicion);
+            }
+        }
+
+    });
+    </script>
+</body>
+</html>

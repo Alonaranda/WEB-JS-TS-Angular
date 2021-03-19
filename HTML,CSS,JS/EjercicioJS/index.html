@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .boton{
+            background: yellow;
+            font-size: 30px;
+            margin: 2px 10px;
+            padding: 2px 20px;
+        }
+    </style>
+    <title>Ejercicio JS</title>
+</head>
+<body>
+    <h1>Ejercicio JavaScript</h1>
+    <a id="link" href="https://www.google.com.mx">Ir a google</a>
+    <br>
+    <a id="linkSearch" href="https://www.google.com.mx">Buscar en Google</a>
+    <br>
+
+
+
+    
+    <h1>Ejemplo de botones rollover</h1>
+    <a href="https://www.google.com.mx">
+        <img id="imagen" src="http://globalmentoring.com.mx/imagenes/html5.png" alt="img">
+    </a>
+    <br>
+
+
+
+
+    <h1>Ejercicio Suma</h1>
+    <fieldset>
+        <legend>Operaciones</legend>
+        <label>Primer dato: </label><input id="valor1" type="number" placeholder="Tu primer valor">
+        <label>Segundo dato: </label><input id="valor2" type="number" placeholder="Tu segundo valor">
+    </fieldset>
+    <br>
+    <button onclick="sumar()" class="boton">Sumar</button>
+    <button onclick="restar()" class="boton">Restar</button>
+    <button onclick="multiplicar()" class="boton">Multiplicar</button>
+    <button onclick="dividir()" class="boton">Dividir</button>
+    <br>
+    <label>Resultado: </label> <label id="resultado">0</label>
+
+
+
+
+
+    <script src="main.js"></script>
+</body>
+</html>

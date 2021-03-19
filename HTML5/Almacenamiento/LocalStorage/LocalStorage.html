@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manejo de Local Storage</title>
+    
+</head>
+<body>
+    <h1>Manejo de local storage</h1>
+
+    <div>
+        <ul id="lista" contenteditable="true">
+            <li></li>
+        </ul>
+    </div>
+
+    <button type="button" name="Limpiar" id="limpiar">Limpiar</button>
+
+    <div id="mensaje">
+
+    </div>
+
+    <div id="resultado">
+
+    </div>
+
+
+    <!--SCRIPTS-->
+    <script src="../modernizr-3.8.0.min.js"></script>
+    <script src="../jquery.js"></script>
+    <!--
+    <script type="text/javascript">
+        if(Modernizr.localstorage){
+            alert("Si tienes soporte de local storage");
+        }else{
+            alert("No tienes soporte de local storage");
+        }
+    </script>-->
+    <script>
+        $(document).ready(function(){
+            $("#lista").blur(function(){
+                localStorage.setItem("listado", $("#lista").html());
+                location.reload();
+            });
+        });
+
+        if(localStorage.getItem("listado")){
+            $("#mensaje").html("<h3>Datos almacenados en local storage: </h3>");
+            $("#lista").html(localStorage.getItem("listado"));
+            $("#resultado").text(localStorage.getItem("listado"));
+        }else{
+            $("#mensaje").text("No hay datos en Local Storage");
+        }
+
+        $("#limpiar").click(function(){
+            localStorage.removeItem("listado");
+            location.reload();
+        });
+
+        window.addEventListener("storage", escucharEvento, false);
+
+        function escucharEvento(e){
+            console.log("Evento generado localStorage: " + e.storageArea.listado);
+            location.reload();
+        }
+    </script>
+</body>
+</html>

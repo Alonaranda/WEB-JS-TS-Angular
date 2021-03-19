@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>FlexBox en CCS3</title>
+</head>
+<body>
+    <!--
+        Se define al elemento padre como flexbox:
+        div{display: box}
+        display: inline-box
+
+        box-align - Vertical o horizontal
+        box-pack - Controla lo opuesto de box-align(start, end, center, justify)
+        box-flex - Define una proporcion(Doble de los otros elementos)
+        box-direction - Puede invertir el orden de los elementos (normal, reverse)
+        box-ordinal-group - Agrupa los elementos, asignando un numero de grupo
+        box-orient - Se recomienda utlizar box-align en su lugar
+
+        Dudas, revisar:
+        https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+    -->
+    <h1>Flexbox en CCS3</h1>
+    <div id="contenedor">
+        <div id="uno">
+            <p>Uno</p>
+        </div>
+        <div id="dos">
+            <p>Dos</p>
+        </div>
+        <div id="tres">
+            <p>Tres</p>
+        </div>
+        <div id="cuatro">
+            <p>Cuatro</p>
+        </div>
+        <div id="cinco">
+            <p>Cinco</p>
+        </div>
+    </div>
+
+    <h2>flex-wrap: nowrap</h2>
+    <div id="contenedor2">
+            <div id="uno2">
+                <p>Uno</p>
+            </div>
+            <div id="dos2">
+                <p>Dos</p>
+            </div>
+            <div id="tres2">
+                <p>Tres</p>
+            </div>
+            <div id="cuatro2">
+                <p>Cuatro</p>
+            </div>
+            <div id="cinco2">
+                <p>Cinco</p>
+            </div>
+    </div>
+    
+    <h2>flex-wrap: wrap</h2>
+    <div id="contenedor3">
+            <div id="uno3">
+                <p>Uno</p>
+            </div>
+            <div id="dos3">
+                <p>Dos</p>
+            </div>
+            <div id="tres3">
+                <p>Tres</p>
+            </div>
+            <div id="cuatro3">
+                <p>Cuatro</p>
+            </div>
+            <div id="cinco3">
+                <p>Cinco</p>
+            </div>
+    </div>
+
+
+
+    <h2>flex-flow : (flex-direction, flex-wrap)</h2>
+    <div id="contenedor4">
+            <div id="uno4">
+                <p>Uno</p>
+            </div>
+            <div id="dos4">
+                <p>Dos</p>
+            </div>
+            <div id="tres4">
+                <p>Tres</p>
+            </div>
+            <div id="cuatro4">
+                <p>Cuatro</p>
+            </div>
+            <div id="cinco4">
+                <p>Cinco</p>
+            </div>
+    </div>
+</body>
+</html>

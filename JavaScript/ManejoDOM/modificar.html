@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manejo de DOM</title>
+</head>
+<body>
+    <h1 id="titulo">Hola</h1>
+
+    <button onclick="mostrar()">
+        No presionar, document.write('Sobreescribe')
+    </button>
+    <br>
+    <br>
+
+    <button onclick="cambiartitulo()">
+            Cambiar titulo
+    </button>
+    <br>
+    <br>
+
+    <img id="imagen" src="http://globalmentoring.com.mx/imagenes/javascript.png" alt="no carga">
+
+    <button onclick="cambiarAtributo()">
+            Cambiar atributo
+    </button>
+    <br>
+    <br>
+
+    <h1 id="estiloCambio">Jugando con estilos</h1>
+
+    <button onclick="cambiarEstilo()">
+            Cambiar estilo
+    </button>
+    <br>
+    <br>
+
+    <script>
+        function cambiartitulo(){
+            document.getElementById('titulo').innerHTML = 'Nuevo titulo';
+        }
+
+        function mostrar(){
+            document.write('Adios')
+        }
+
+        function cambiarAtributo(){
+            document.getElementById('imagen').src = 'http://globalmentoring.com.mx/imagenes/html5.png'
+        }
+
+        function cambiarEstilo(){
+            document.getElementById('estiloCambio').style.color = 'red';
+        }
+    </script>
+    
+</body>
+</html>

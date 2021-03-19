@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Multimedia</title>
+</head>
+<body>
+    <!--Tecnología abierta: Ogg y webm-->
+    <!--Tecnología cerrada: H.264-->
+    <!--Mostrar en dos opciones para asegurar que reproduzca en cualquier navegador: OGG,WAV-->
+
+    <!--Codificadores de video
+    Contenedor formato: Video{codificador video, codificador audio}
+    -->
+
+    <!--Codificador de audio
+    Contenedor formato: Audio{contenedor audio}
+    -->
+
+    <header>
+        <h1>Manejo de video el html5</h1>
+        <video controls="" poster="../Multimedia/Recursos/video.jpg" autoplay="" loop="">
+            <source src="Recursos/video.mp4" type="video/mp4"/>
+            <!--Agregas màs source para que corra distintos videos{ogg,mp4,gv} por si no puede con uno-->>
+            <p>El navegador no soporta video html5</p>
+            <!--Se puede agregar un soporte en flash-->
+        </video>
+
+        <h1>Manejo de audio el html5</h1>
+            <!--Se deben tener los distintos formatos{m4a,mp3,ogg}-->
+            <audio controls="" autoplay="" style="width: 500px">
+                <source src="Recursos/IntroGlobalMentoring.mp3" type="audio/mpeg/">
+                <source src="Recursos/IntroGlobalMentoring.m4a" type="audio/mp4/">
+                <source src="Recursos/IntroGlobalMentoring.ogg" type="audio/ogg/">
+            </audio>
+    </header>
+
+</body>
+</html>

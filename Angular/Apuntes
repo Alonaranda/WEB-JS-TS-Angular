@@ -1,0 +1,228 @@
+Angular es un Framework de JavaScript
+
+Se basa en hacer paginas SPA Single Page Aplication 
+Donde contenido se pueden quedar estaticos y solo se modifica una parte de la pagina 
+
+CLI - Command Line Interface --> Con esto se crean los componentes 
+
+Tener NodeJS
+Tener Visual Studio Code 
+Instalar Angular -> https://angular.io/
+
+DESDE CLI:
+//Crear nueva aplicacion
+ng new mi-primera-app
+
+//Iniciar o detener servidor 
+control + C --> Detener 
+ng serve -o --> Iniciar
+
+
+//Archivos que se crean, en producción se eliminan 
+//node_modules nos permite ejecutar nuestra aplicación 
+//src --> Todo nuestro codigo fuente
+app-root --> Componente principal que se guarda en la carpeta app 
+
+
+Si no te deja ejecutar scripts, en terminal de administrador :
+Set-ExecutionPolicy Unrestricted
+
+Get-ExecutionPolicy
+
+
+//
+Dentro de la pagina principal index.html se encuentran definidos los componentes en el body
+<body>
+  <app-root></app-root>
+</body>
+
+Esto indica que en la carpeta app entontrara lo demas,
+ahí se encuentra app.components.ts, donde se especifican los links de ese componentes: 
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'miPrimeraApp';
+}
+
+
+
+//Archivos importantes:
+package.json son los modulos y dependencias con las que trabajaremos
+angular.json podemos incorporar ahí nuestras hojas de estilos scripts
+
+//Si un proyecto no tiene node_modules se debe hacer lo siguiente:
+Ir a la carpeta en la terminal 
+npm install --> Recrea nuestro proyecto, con lo que le haga falta
+
+//Flujo de una aplicacion
+main.ts --> Arranca con AppModule en appModulo, deben agregarse todos nuestros componentes
+ya se de forma manual o con cli 
+
+
+//CLI -> Creacion de componentes
+ng generate component persona
+ng g c persona 
+
+//Componentes en Línea
+En los documentos TS especificamos las direcciones de donde se encuentra el html o css,
+pero si el codigo es pequeño lo podemos incluir ahi mismo 
+ng generate component -style -template
+ng g c persona -s -t
+
+//Instalar bootstrap
+npm install bootstrap --save
+npm install jquery --save
+npm install popper.js  --save
+npm i bootstrap jquery popper.js --save
+
+modificar angular.json para agregarlos:
+            "styles": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+
+
+//Directiva inif 
+Nos va a permitir modificar la información que mostramos en nuestra plantilla,
+gracias a un condicional 
+Dentro del elemento html se agrega *ngIf="condicion; else condicionElse"
+<ng-template #condicionElse>Se muestra si el caso cae en el else</ng-template>
+
+
+//Al crear un constructor y si definimos los atributos como public 
+//ya no debemos declarar la variable ni crear el this de cada atributo
+
+//Directiva *ngFor
+Dentro del elemento HTML se agrega *ngFor="let iterador of nombreArreglo; let i of index"
+<p> Se obtiene el valor {{i}} que es {{iterador}} </p>
+
+
+//Property binding entre componentes
+
+@Input: Parent --> Child  Se envia data flow de Padre a Hijo 
+
+Todo mediante ==> @Input() resultadoHijo: number; y hacer la concatenacion 
+
+@Output: Parent <-- Child Se envia data flow de Hijo a Padre
+
+Todo mediante el evento ==> @Output() resultadoSuma = new EventEmitter<number>();
+y regresar el evento con resultadoSuma.emit(respuesta)
+
+<!--Output-->
+  <app-formulario
+    (resultadoSuma) = "procesarResultado($event)" 
+  ></app-formulario>
+
+
+
+
+//Referencias locales en Angular 
+Dentro de la plantilla HTML se pone el nombre #nombreInput
+y dentro del componente se pasa la variable:HTMLInputElement y se accede con nombre.value
+
+
+//ViewChild y Local Reference
+Se pone referencia local #referencia y en el componente se pone:
+@ViewChild('referencia') referencia:ElementRef; y dentro del metodo se usa this.referencia.nativeElement.value
+
+
+//Servicios
+Clase de typeScript que es utilizada por varios componentes 
+Componente A --> Service --> Componente B
+
+Crear una clase servicio.service.ts
+Se agrega a la clase al constructor de forma private 
+y si lo queremos global se incluye en app.modules.ts en providers
+
+//Routing
+Nos va a permitir mostrar diferentes componentes en la misma pagina 
+ng g module app-routing
+
+
+//Firebase (PUSH, PUT, DELETE, GET )
+1.- Ir a Firebase y crear un nuevo proyecto 
+2.- Crear una base de datos (Existe Cloud Firebase o Realtime DataBase)
+3.- Se crea un servicio data.services.ts y lo añadimos a providers de app.module.ts y en imports
+4.- En el constructor agregamos el servicio httpCliente con @Injectable()
+5.- Al mandar los datos se debe hacer una escucha, con subscribe y tiene response y error 
+
+
+//Autenticacion 
+1.- Ir a Firebase/authentication
+2.- Seleccionar con que forma nos vamos a identificar 
+3.- Seleccion la regla de read solo con auth ".read": "auth != null" y ".write": "auth != null
+4.- Crear correo para que pueda entrar y empecemos a usar tokens 
+
+
+//Configuracion Firebase 
+1.- Instalar Firebase: npm install --save firebase o  npm install firebase @angular/fire --save
+1.- Ir app.component.ts 
+2.- Hacer el import: import * as firebase from 'firebase';
+3.- Iniciarlo 
+
+
+app.component.ts
+ngOnInit(){
+    let admin = require("firebase-admin");
+    let serviceAccount = require("path/to/serviceAccountKey.json");
+    admin.initializeApp({
+      apiKey: "AIzaSyBCfNu4nc-y1Om_lwEzKsW4le-gq4OjRlg",
+      authDomain: "listado-personas-c5d7b.firebaseapp.com",
+      credential: admin.credential.cert(serviceAccount),
+      databaseURL: "https://listado-personas-c5d7b-default-rtdb.firebaseio.com"
+    })
+
+
+
+//Se crea login.services.ts 
+@Injectable()
+export class LoginService{
+    token:string;
+
+    constructor(private router:Router){}
+
+    login(email:string, password:string){
+        firebase.default.auth().signInWithEmailAndPassword(email, password).then(
+            response => {
+                firebase.default.auth().currentUser.getIdToken().then(
+                    token => {
+                        this.token = token;
+                        this.router.navigate(['/']);
+                    }
+                )
+            }
+        )
+    }
+
+
+getIdToken(){
+        return this.token;
+    }
+
+
+//Despliegue a produccion
+1.-Compilar aplicacion: ng build --prod --aot
+2.-Crea la carpeta dist para su despliegue
+3.- Si su despliegue es en una carpeta: ng build --prod --aot --base-href /listado-personas/
+4.- Ir a Firebase/hosting
+5.- npm install -g firebase-tools
+6.- firebase login 
+7.- firebase init -->Activar caracteristicas 
+8.- firebase deploy 
+9.- firebase open hosting:site 
+
+
+
+//Quitar modo strict 
+
+"strictPropertyInitialization": false,

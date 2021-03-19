@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo DOM con JS</title>
+    <style>
+        .azul{
+            color: blue;
+        }
+    </style>
+</head>
+
+
+<body>
+    <h1 id="cabecero" class="azul">Ejemplo DOM con JavaScript</h1>
+    <h2 id="titulo">Ejemplo:</h2>
+    <p id="parrafo1" class="azul">Saludos </p>
+    <p id="parrafo2" class="azul">Otro parrafo</p>
+
+    <!--Poner siempre el script hasta el final del body, se maneja de forma secuencial-->
+    <script>
+        let cabecero = document.getElementById('cabecero').innerHTML;//Inner nos permite tener el texto
+        console.log('Valor de cabecero con inner: ' + cabecero);
+
+
+        let titulo = document.getElementById('titulo');
+        console.log(titulo);
+        console.log(`Texto del h2: ${titulo.innerHTML}`);
+        console.log('Objeto titulo - Heading: ' + titulo);
+
+
+        let p = document.getElementById('parrafo1');
+        console.log(`Valor del parrafo: ${p.innerHTML}`);
+
+
+        //Modificar contenido
+        titulo.innerHTML = 'Nuevo texto de h2';
+        p.innerHTML = 'Cambiado';
+
+
+        //TagName --> selecciona por tipo, h, p,...
+        let parrafos = document.getElementsByTagName('p');
+        console.log(parrafos);
+        for(let i = 0; i < parrafos.length; i++){
+            console.log(parrafos[i].innerHTML);
+        }
+
+
+        //ClassName --> selecciona por el nombre de la clase
+        let clases = document.getElementsByClassName('azul');
+        console.log(clases);
+        for(let elementos of clases){
+            console.log(elementos.innerHTML);
+        }
+
+        //querySelectorAll --> elemento con clase o elementos solos
+        let clases2 = document.querySelectorAll('p.zul');
+        console.log(clases2);
+
+
+
+
+        
+
+    </script>
+</body>
+</html>

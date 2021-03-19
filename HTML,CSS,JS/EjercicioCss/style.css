@@ -1,0 +1,32 @@
+/*Toman la prioridad 3*/
+body{
+    background: #25DD23;
+    color: white;
+    font-weight: bold;
+    font-family: Arial Black;
+}
+
+h1{
+    font-size: xx-large;
+    font-style: italic;
+}
+
+p{
+    font-weight: bolder;
+    background: #468B78;
+}
+/*Selecionamos por id*/
+#ejemplo2{
+    background: yellow;
+}
+/*Selecionamos por clase*/
+.resaltado p{
+    font-weight: bold;
+    color: red;
+    background: salmon;
+}
+
+.nuevaClaseCss{
+    color: #25DD23;
+    background: peru;
+}

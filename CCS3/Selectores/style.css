@@ -1,0 +1,66 @@
+/*Selecciona los p cuyo padre es un div*/
+
+div > p{
+    color: red;
+    background-color: yellow;
+}
+
+/*Selecciona los parrafos adyacentes a div y deben tener el mismo nivel de jerarquia */
+div + p{
+    color: blue;
+    background-color: orange;
+}
+
+/*Selecciona los parrafos cuyo div es hermano, p debe estar despues de div, 
+no necesariamente adyacente*/
+
+div ~ p{
+    color: brown;
+    background-color: aquamarine;
+}
+
+/*Seleccion por atributos*/
+
+a[href^=https]{
+    color: blueviolet;
+}
+
+a[href$=com]{
+    color: darkgoldenrod;
+}
+
+a[href*=pdf]{
+    background: url(./pdf_icon.png) no-repeat right;
+    padding-right: 25px;
+    color: aqua;
+}
+
+/*Selectores N-child*/
+li:first-child{
+    color: royalblue;
+    background-color: yellow;
+}
+
+li:last-child{
+    color: rebeccapurple;
+    background-color: yellowgreen;
+}
+
+li:nth-child(5){
+    color: red;
+}
+
+li:nth-child(3n){
+    color: blue;
+}
+li:nth-child(2n+6){
+    background-color: antiquewhite;
+}
+
+li:nth-child(-2n+4){
+    background-color: azure;
+}
+
+li:nth-last-child(4){
+    color: black;
+}

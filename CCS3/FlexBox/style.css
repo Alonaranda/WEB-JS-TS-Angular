@@ -1,0 +1,92 @@
+
+#contenedor div{
+    background-color: aqua;
+    padding: 10px;
+    width: 60px;
+    margin: 10px;
+}
+
+#contenedor{
+    width: 90%;
+    background-color: blanchedalmond;
+    display: flex;
+    border: 1px dashed black;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#uno, #dos, #tres, #cuatro, #cinco{
+    flex-basis: auto;
+}
+
+
+
+#contenedor2 div{
+    background-color: yellowgreen;
+    padding: 10px;
+    width: 60px;
+    margin: 10px;
+}
+
+
+
+#contenedor2{
+    width: 90%;
+    display: flex;
+    border: 1px dashed black;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    list-style: none;
+}
+
+#contenedor2 #uno2, #contenedor2 #dos2, #contenedor2 #tres2, #contenedor2 #cuatro2, #contenedor2 #cinco2{
+    width: 300px;
+}
+
+
+
+
+#contenedor3 div{
+    background-color: azure;
+    padding: 10px;
+    width: 60px;
+    margin: 10px;
+}
+#contenedor3{
+    width: 90%;
+    display: flex;
+    border: 1px dashed black;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    list-style: none;
+}
+
+
+#contenedor3 #uno3, #contenedor3 #dos3, #contenedor3 #tres3, #contenedor3 #cuatro3, #contenedor3 #cinco3{
+    width: 300px;
+}
+
+
+
+
+#contenedor4 div{
+    background-color: yellow;
+    padding: 10px;
+    width: 60px;
+    margin: 10px;
+}
+#contenedor4{
+    width: 90%;
+    display: flex;
+    border: 1px dashed black;
+    flex-flow: row wrap;
+    list-style: none;
+}
+
+
+#contenedor4 #uno4, #contenedor4 #dos4, #contenedor4 #tres4, #contenedor4 #cuatro4, #contenedor4 #cinco4{
+    width: 300px;
+}
+
+
+

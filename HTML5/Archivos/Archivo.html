@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Archivos</title>
+</head>
+<body>
+    <h2>Seleccion de archivo</h2>
+    <form>
+        <label for="archivo">Selecciona un archivo</label>
+        <input type="file" name="archivo" id="archivo">
+    </form>
+
+    <h2>Seleccion de varios archivos</h2>
+    <form>
+        <label for="archivos">Selecciona varios archivos</label>
+        <input type="file" name="archivos" id="archivos" multiple>
+    </form>
+    <div id="salida">
+    </div>
+
+    <h2>Drag and Drop</h2>
+    <p>Arrastra el archivo: </p>
+    <div id="zona_arrastrar">
+
+    </div>
+    <p>Resultado: </p>
+    <div id="salidaDD">
+    </div>
+
+    <h2>Lectura de archivos</h2>
+    <form>
+        <label for="archivoLectura">Selecciona un archivo para leer</label>
+        <input type="file" name="archivoLectura" id="archivoLectura">
+        <p>Contenido del archivo</p>
+        <textarea name="" id="contenido" cols="100" rows="15"></textarea>
+    </form>
+
+    <h2>Lectura de imagenes</h2>
+    <form>            
+        <label for="archivoImagen">Selecciona una imagen para leer</label>
+        <input type="file" name="archivoImagen" id="archivoImagen">
+        <p>Contenido de la imagen</p>
+        <div id="contenidoImagen">
+
+        </div>
+    </form>
+
+    <h2>Eventos API de archivos</h2>
+    <form>
+        <label for="archivoEventos">Selecciona un archivo</label>
+        <input type="file" name="archivoEventos" id="archivoEventos">
+    </form>
+    <p>Nombre del archivo: <span id="nombre_archivo"></span></p>
+    <p>Leer contenido del archivo</p>
+    <button id="iniciarLectura">Iniciar lectura</button>
+    <button id="detenerLectura">Detener lectura</button>
+    <p>Progreso de la lectura: <span id="leyendo">%</span></p>
+    <progress id="progressbar" value="0" max="100"></progress>
+    <div id="progreso">
+
+    </div>
+
+
+
+
+    <script src="./modernizr-3.8.0.min.js"></script>
+    <script src="./jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            let archivoEventos = null;
+            let readerEventos = null;
+
+
+            //Un archivo
+            $("#archivo").change(manejoArchivos);
+            function manejoArchivos(evento){
+                alert("Has seleccionado: " + evento.target.files[0].name);
+            }
+            //Varios archivos
+            $("#archivos").change(manejoVariosArchivos);
+            function manejoVariosArchivos(evento){
+                let archivos = evento.target.files;
+                for(let i = 0; i < archivos.length; i++){
+                    let info = "<p>" + (i + 1) + ") Nombre: " + archivos[i].name + 
+                        ", Tamaño: " + archivos[i].size + 
+                        ", Tipo MIME: " + archivos[i].type + "</p>";
+                        $("#salida").append(info);
+                }       
+            }
+
+            //Drag and Drop
+            $("#zona_arrastrar").bind({
+                "drop": manejoDrop,
+                "dragover": manejoDragOver
+            });
+            function manejoDragOver(evento){
+                evento.stopPropagation();
+                evento.preventDefault();
+            }
+
+            function manejoDrop(evento){
+                evento.stopPropagation();
+                evento.preventDefault();
+
+                //Jquery envuelve el evento original
+                let dataTransfer = evento.dataTransfer || (evento.originalEvent && evento.originalEvent.dataTransfer);
+                let documentos = evento.target.files || (dataTransfer && dataTransfer.files);
+
+                $("#salidaDD").html("");
+                for(let i = 0; i <= documentos.length; i++){
+                    let informacion = "<p>" + (i + 1) + ") Nombre: " + documentos[i].name + 
+                        ", Tamaño: " + documentos[i].size + 
+                        ", Tipo MIME: " + documentos[i].type + "</p>";
+                        $("#salidaDD").append(informacion);
+                }
+            }
+
+
+            //Lectura de archivos
+            $("#archivoLectura").change(lecturaArchivo);
+            function lecturaArchivo(evento){
+                let arc = evento.target.files[0];
+                if(arc.type !== "text/plain"){
+                    alert("Debes seleccionar un archivo de texto");
+                    return;
+                }
+                
+                let reader = new FileReader();
+                reader.onload = function(evento){
+                    var resultadoTexto = evento.target.result;
+                    $("#contenido").append(resultadoTexto);
+                };
+
+                reader.readAsText(arc);
+
+            }
+
+
+            //Lectura imagen
+            $("#archivoImagen").change(lecturaImagen);
+            function lecturaImagen(evento){
+                let img = evento.target.files[0];
+                
+                if(!img.type.match("image.*")){
+                    alert("No es imagen");
+                    return
+                }
+
+                let reader = new FileReader();
+
+                reader.onload = function(evento){
+                    let imagen = new Image();
+                    imagen.src = evento.target.result;
+                    $("#contenidoImagen").append(imagen);
+                };
+
+                reader.readAsDataURL(img);
+            }
+
+            //Eventos
+            $("#archivoEventos").change(manejoArchivoEventos);
+            $("#iniciarLectura").click(iniciarLectura);
+            $("#detenerLectura").click(detenerLectura);
+
+            function manejoArchivoEventos(evento){
+                reiniciarValores();
+                archivoEventos = evento.target.files[0];
+                $("#nombre_archivo").html(archivoEventos.name + ", Tamaño: " + archivoEventos.size);
+            };
+
+            function reiniciarValores(){
+                $("#progreso").empty();
+                $("#leyendo").text(0);
+                $("#progressbar").val(0);
+            };
+
+            function iniciarLectura(){
+                reiniciarValores();
+                if(archivoEventos != null){
+                    readerEventos = new FileReader();
+
+                    //Evento onloadstart
+                    readerEventos.onloadstart = function(evento){
+                        $("#progreso").append("<p> Inicio la lectura (onloadstart) </p>");
+    
+                    };
+
+                    //Evento onloadend
+                    readerEventos.onloadend = function(evento){
+                        $("#progreso").append("<p> Termino la lectura (onloadend) </p>");
+    
+                    };
+
+                    //Evento onload
+                    readerEventos.onload = function(evento){
+                        $("#contado").append("<p> Lectura del archivo al 100% </p>");
+                        $("#progreso").append("<p> Lectura del archivo completo (onload) </p>");
+                    };
+                    
+                    //Evento onprogress
+                    readerEventos.onprogress = function(evento){
+                        if(evento.lengthComputable){
+                            let total_a = evento.total;
+                            let progreso_a = 15;
+                            console.log(total_a);
+                            let calculo = Math.round((progreso_a/total_a) * 100);
+                            console.log(calculo);
+                            $("#leyendo").text(calculo);
+                            $("#progressbar").val(calculo);
+                        }else{
+                            alert("No pude");
+                        }
+                    };
+
+                    //Evento onerror
+                    readerEventos.onerror = function(evento){
+                        $("#progreso").append("<p> Ocurrio un error con el  archivo (onerror) </p>");
+                    };
+
+                    //Evento onabort
+                    readerEventos.onabort = function(){
+                        $("#progreso").append("<p> Se aborto misión (onabort) </p>");
+                    };
+
+                    //Leemos archivo
+                    readerEventos.readAsBinaryString(archivoEventos);
+
+
+                }else{
+                    alert("Primero debes seleccionar un archivo master");
+                }
+            };
+
+
+            function detenerLectura(){
+                if(readerEventos){
+                    readerEventos.abort();
+                }
+            };
+        });
+
+    </script>
+    
+</body>
+</html>

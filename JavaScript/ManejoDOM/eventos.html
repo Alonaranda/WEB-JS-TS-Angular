@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manejo del DOM con JS</title>
+</head>
+
+<!--Evento onload: -->
+<body onload="entrar()">
+
+    <!--Mala practica:-->
+    <h1 onclick="this.innerHTML = 'Cambiar h1 con Js, desde evento onClick'">Manejo del DOM con JS</h1>
+    <!--Buena practica:-->
+    <h2 onclick="cambiarTexto(this)">Eventos con Js</h2>
+
+    <!--Asociar evento desde Js -->
+    <h2 id="titulo">Llamar evento desde JS</h2>
+
+    <div id="contenido">
+
+    </div>
+    <br><br><br>
+
+    <!--Evento onchange-->
+    Agregar nombre: <input type="text" id="nombre" onchange="convertir()" placeholder="Agregar nombre">
+
+    <!--Evento onmousemove-->
+    <h2 id="mouse1" onmousemove="mousemove()">onMouseMove</h2>
+    <!--Evento onmouseover-->
+    <h2 id="mouse2" onmouseover="mouseover()" onmouseout="mouseout()">onMouseOver</h2>
+    <!--Evento onmouseover-->
+    <h2 id="mouse3" onmouseout="mouseout()">onMouseOut</h2>
+    <!--Evento onmousedown-->
+    <h2 id="mouse4" onmousedown="mousedown()" onmouseup="mouseup()">onMouseDown</h2>
+    <!--Evento onmouseup-->
+    <h2 id="mouse5" onmouseup="mouseup()">onMouseUp</h2>
+    <!--Evento onclick-->
+    <h2 id="eventoOnclick" onclick="verde(this)">Evento</h2>
+
+
+    <script>
+        function entrar(){
+            console.log('Entrando a pagina WEB');
+            let texto = '';
+            if(navigator.cookieEnabled){
+                texto = 'Las cookies estan habilitades'
+            }else{
+                texto = 'Las cookies no estan habilitadas'
+            }
+            document.getElementById('contenido').innerHTML = texto;
+
+        }
+
+        function cambiarTexto(titulo){
+            console.log(titulo);
+            console.log(titulo.innerHTML);
+            titulo.innerHTML = 'Cambiamos el titulo';
+        }
+
+        document.getElementById('titulo').onclick = cambiarColor;
+
+        function cambiarColor(){
+            document.getElementById('titulo').style.color = 'red'; 
+            document.getElementById('contenido').innerHTML = `Nuevo contenido`;
+        }
+
+        function convertir(){
+            let nombre = document.getElementById('nombre');
+            nombre.value = nombre.value.toUpperCase();
+        }
+
+
+        //onmousemove
+        function mousemove(){
+            document.getElementById('mouse1').style.color = 'yellow';
+        }
+
+        //onmouseover
+        function mouseover(){
+            document.getElementById('mouse2').style.color = 'red';
+        }
+
+        //onmouseout
+        function mouseout(){
+            document.getElementById('mouse2').style.color = 'blue';
+            document.getElementById('mouse3').style.color = 'orange';
+        }
+
+        //onmousedown
+        function mousedown(){
+            document.getElementById('mouse4').style.color = 'red';
+        }
+
+        //onmouseup
+        function mouseup(){
+            document.getElementById('mouse5').style.color = 'yellow';
+        }
+
+        //onclick
+        function verde(eventoOnclick){
+            console.log('Me pongo verde');
+            eventoOnclick.style.color = 'verde';
+        }
+
+    </script>
+    
+</body>
+</html>

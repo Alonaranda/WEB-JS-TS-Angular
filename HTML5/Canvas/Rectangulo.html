@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rectangulo con canvas</title>
+</head>
+<body>  
+    <h1>Rectángulos con Canvas</h1>
+    <canvas id="canvas1" width="300px" height="200px" style="border:  dotted gray 1px">
+
+    </canvas>
+
+    <h2>Circulo con Canvas</h2>
+    <canvas id="canvas2" width="600px" height="400px" style="border:  dotted gray 1px">
+
+    </canvas>
+
+    <h2>Lineas y Trazos con Canvas</h2>
+    <canvas id="canvas3" width="600px" height="400px" style="border:  dotted gray 1px">
+
+    </canvas>
+
+    <h2>Texto y gradientes con Canvas</h2>
+    <canvas id="canvas4" width="600px" height="400px" style="border:  dotted gray 1px">
+
+    </canvas>
+
+    <h2>Animaciones con Canvas</h2>
+    <canvas id="canvas5" width="600px" height="400px" style="border:  dotted gray 1px">
+
+    </canvas>
+
+
+
+
+
+    <!--Scripts-->
+    <script src="./jquery.js"></script>
+    <script src="./modernizr-3.8.0.min.js"></script>
+    <script>
+        let x = 0, y = 0, anchoRect = 40;
+        let direccion = "derecha";
+        $(document).ready(function(){
+            
+            //Rectangulos
+            let ctx = $("#canvas1")[0].getContext("2d");
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 7;
+            ctx.strokeRect(10, 10, 200, 100);
+            ctx.fillStyle = "yellow";
+            ctx.fillRect(10,10, 200, 100);
+
+
+            //Circulos y arcos
+            let canvasCirculo = document.getElementById("canvas2");
+            let ctxCirculo = canvasCirculo.getContext("2d");
+            //Obtenemos el punto central
+            let centroX = canvasCirculo.width / 2;
+            let centroY = canvasCirculo.height / 2;
+            let radio = 40;
+            //Empezar a dibujar
+            ctxCirculo.beginPath();
+            ctxCirculo.arc(centroX, centroY, radio, 0, 2*Math.PI, false);
+            ctxCirculo.lineWidth = 5;
+            ctxCirculo.strokeStyle = "black";
+            ctxCirculo.stroke();
+            ctxCirculo.fillStyle = "red";
+            ctxCirculo.fill();
+
+
+            ctxCirculo.beginPath();
+            ctxCirculo.arc(60,60, radio, 0, 0.5*Math.PI);
+            ctxCirculo.strokeStyle = "black";
+            ctxCirculo.stroke();
+
+
+            ctxCirculo.beginPath();
+            ctxCirculo.arc(120,120, radio, 0, Math.PI);
+            ctxCirculo.strokeStyle = "black";
+            ctxCirculo.stroke();
+
+
+            ctxCirculo.beginPath();
+            ctxCirculo.arc(400,200, radio, 0, (Math.PI* 270)/180, false);
+            ctxCirculo.strokeStyle = "black";
+            ctxCirculo.stroke();
+
+
+            //Lineas y trazos
+            let canvasLineas = document.getElementById("canvas3");
+            let ctxLineas = canvasLineas.getContext("2d");
+            ctxCirculo.beginPath();
+            ctxLineas.moveTo(10,10);
+            ctxLineas.lineTo(100, 100);
+            ctxLineas.strokeStyle = "green";
+            ctxLineas.stroke();
+
+            ctxLineas.lineTo(200,10);
+            ctxLineas.closePath();
+            ctxLineas.stroke();
+
+            ctxLineas.fillStyle = "yellow";
+            ctxLineas.fill();
+
+            ctxLineas.save();
+
+            ctxLineas.strokeStyle = "pink";
+            ctxLineas.fillStyle = "orange";
+
+            ctxLineas.beginPath();
+            ctxLineas.moveTo(500,300);
+            ctxLineas.lineTo(100, 100);
+            ctxLineas.lineTo(100, 400);
+            ctxLineas.closePath();
+            ctxLineas.fill();
+            ctxLineas.stroke();
+
+            ctxLineas.restore();
+            ctxLineas.beginPath();
+            ctxLineas.moveTo(500, 50);
+            ctxLineas.lineTo(450, 60);
+            ctxLineas.lineTo(500, 70);
+            ctxLineas.closePath();
+            ctxLineas.fill();
+            ctxLineas.stroke();
+
+
+            //Texto y gradientes
+            let canvasTexto = document.getElementById("canvas4");
+            let ctxTexto = canvasTexto.getContext("2d");
+            let texto = "Texto modificado";
+            ctxTexto.font = 'italic 70pt Calibri';
+            ctxTexto.fillStyle = "yellow";
+            ctxTexto.strokeStyle = "red";
+            ctxTexto.fillText(texto, 50, 100);
+            ctxTexto.strokeText(texto, 50, 100);
+
+            ctxTexto.font = '50px Verdana';
+            let gradiente = ctxTexto.createLinearGradient(0,0,canvas4.width, 0);
+            gradiente.addColorStop("0", "magenta");
+            gradiente.addColorStop("0.5", "blue");
+            gradiente.addColorStop("1", "green");
+
+
+            ctxTexto.fillStyle = gradiente;
+            ctxTexto.fillText("Hola mundo", 40, 200);
+
+
+            //Animaciones
+
+            animar();
+            
+        });
+
+        function animar(){
+            let canvasAnimacion = document.getElementById("canvas5");
+            let ctxAnimacion = canvasAnimacion.getContext("2d");
+            ctxAnimacion.strokeStyle = "red";
+            ctxAnimacion.fillStyle = "black";
+            ctxAnimacion.lineWidth = 6;
+            ctxAnimacion.fillRect(x, y, anchoRect, anchoRect);
+            ctxAnimacion.strokeRect(x, y, anchoRect, anchoRect);
+            ctxAnimacion.clearRect(0, 0, canvas5.width, canvas5.heigth);
+            actualizarDibujo();
+            setTimeout("animar()", 1);
+        }
+
+        function actualizarDibujo(){
+            //Direccion
+            definirDireccion();
+            if(direccion == "derecha"){
+                x++;
+            }else{
+                x--;
+            }
+        }
+
+        function definirDireccion(){
+            let canvas5 = document.getElementById("canvas5");
+            if(x==0){
+                direccion = "derecha";
+            }else if(x == (canvas5.width - anchoRect)){
+                direccion = "izquierda";
+            }
+        }
+    </script>
+</body>
+</html>

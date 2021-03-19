@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Evento onfocus y onblur</title>
+</head>
+<body>
+    <h1 id="titulo">Manejo de eventos en el DOM con JS</h1>
+    <br>
+    <!--Eventos onfocus y onblur-->
+    Nombre <input type="text" onfocus="cambiar(this)" onblur="regresar(this)" name=" " placeholder="Tu nombre">
+    <br><br>
+    Apellido <input type="text" onfocus="cambiar(this)" onblur="regresar(this)" placeholder="Tu apellido">
+    <br><br>
+
+    <!--Addeventlistener-->
+    Email <input type="text" id="email" placeholder="Tu correo">
+    <br><br>
+    Telefono <input type="text" id="telefono" placeholder="Tu telefono">
+    <br><br>
+
+    <!--Funciones flecha con eventos-->
+    Direccion <input type="text" id="direccion" placeholder="Tu dirección">
+    <br><br>
+    Mascota <input type="text" id="mascota" placeholder="Tu mascota"> 
+    <br><br>
+
+    <!--Delegación de eventos-->
+    <form id="forma">
+            Estatura <input type="text" id="estatura" placeholder="Tu dirección">
+            <br><br>
+            Peso <input type="text" id="peso" placeholder="Tu mascota"> 
+            <br><br>
+    </form>
+
+
+
+    <script>
+        function cambiar(elementoInput){
+            elementoInput.style.background = 'yellow';
+        }
+
+        function regresar(elementoInput){
+            elementoInput.style.background = 'white';
+        }
+
+        //addEventListener agrega eventos
+        document.getElementById('email').addEventListener('focus', mifuncion);
+        document.getElementById('email').addEventListener('blur', miregreso);
+        document.getElementById('telefono').addEventListener('focus', mifuncion);
+        document.getElementById('telefono').addEventListener('blur', miregreso);
+        function mifuncion(evento){
+            let componente = evento.target;
+            componente.style.background = 'green';
+        }
+        function miregreso(evento){
+            evento.target.style.background = 'white';
+        }
+
+
+        //Funciones flecha
+        document.getElementById('direccion').addEventListener('focus', (evento) => {
+            evento.target.style.background = 'orange';
+        });
+        document.getElementById('direccion').addEventListener('blur', (evento) => {
+            evento.target.style.background = 'white';
+        });
+        document.getElementById('mascota').addEventListener('focus', (evento) => {
+            evento.target.style.background = 'orange';
+        });
+        document.getElementById('mascota').addEventListener('blur', (evento) => {
+            evento.target.style.background = 'white';
+        });
+
+        //Seleccionar por division
+        const forma = document.getElementById('forma');
+        forma.addEventListener('focus', (evento) => {
+            evento.target.style.background = 'pink';
+        },true);
+        forma.addEventListener('blur', (evento) => {
+            evento.target.style.background = 'white';
+        },true);
+
+    </script>
+    
+</body>
+</html>

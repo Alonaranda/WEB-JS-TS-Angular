@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulario con Js</title>
+</head>
+<body>
+    <form id="formulario">
+            Nombre: <input type="text" name="nombre" value="" placeholder="Nombre"/>
+            <br>
+            <br>
+            Apellido: <input type="text" name="apellido" value="" placeholder="Apellido"/>
+            <br>
+            <br>
+    </form>
+
+    <form id="email">
+        Email: <input type="email" name="mail" value="" placeholder="@"/>
+        <br>
+        <br>
+    </form>
+
+    <button onclick="mostrarValores()">
+        Mostrar
+    </button>
+
+
+    <div id="valores">
+
+    </div>
+
+
+    <script>
+        function mostrarValores(){
+            let formulario = document.forms['formulario'];
+            let texto = '';
+            /*
+            for(let elemento of formulario){
+                texto += elemento.value + ' ' + '<br/>';
+            }*/
+            let nombre = formulario['nombre'];
+            let apellido = formulario['apellido'];
+            texto = nombre.value + ' ' + apellido.value;
+            console.log(texto);
+            //console.log(texto);
+            document.getElementById('valores').innerHTML = texto;
+        }
+    </script>
+    
+</body>
+</html>

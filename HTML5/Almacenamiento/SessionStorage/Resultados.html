@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mostrar resultados</title>
+    
+</head>
+<body>
+    <h1>Página de resultados</h1>
+
+    <div id="mensaje">
+
+    </div>
+
+    <div id="resultado">
+
+    </div>
+
+    <a href="index.html">Regresar a inicio</a>
+
+
+    <!--SCRIPTS-->
+    <script src="../modernizr-3.8.0.min.js"></script>
+    <script src="../jquery.js"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            if(sessionStorage.getItem("listado")){
+                $("#mensaje").html("<h3>Datos almacenados en local storage: </h3>");
+                $("#resultado").text(sessionStorage.getItem("listado"));
+            }else{
+                $("#mensaje").text("No hay datos en Local Storage");
+            }
+        });
+
+        
+
+        //Entre ventanas en session storage no comparte infoermación
+    </script>
+</body>
+</html>

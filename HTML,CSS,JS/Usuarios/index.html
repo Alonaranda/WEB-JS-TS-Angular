@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Usuarios</title>
+</head>
+<body>
+    <h1>Manejo de usuarios</h1>
+    <br><br>
+    <label class="pregunta">Agregar Usuario: </label> <input id="usuario" type="text" name=""  placeholder="Tu nombre">
+    <button onclick="agregar()">Agregar</button>
+    <div id="listado">
+        <p></p>
+
+    </div>
+    <br>
+    <label class="pregunta">Escribe el nombre del usuario para buscar su posicion: </label><input id="buscador" type="text" name="buscador" placeholder="Buscar">
+    <button onclick="buscar()">Buscar</button>
+    <p>El usuario tiene la posicion: </p> <p id="posicion"></p>
+
+    <script src="main.js"></script>
+</body>
+</html>

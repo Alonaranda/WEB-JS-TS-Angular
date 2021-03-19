@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>{{titulo}}</h1>
+
+  <!--Output-->
+  <app-formulario
+    (resultadoSuma) = "procesarResultado($event)" 
+  ></app-formulario>
+  <br>
+  <br>
+
+  <hr>
+
+  <!--Input-->
+  <app-resultado
+    [resultadoHijo] = "resultadoPadre"
+  ></app-resultado>
+</div>

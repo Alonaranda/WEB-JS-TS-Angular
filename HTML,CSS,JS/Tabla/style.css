@@ -1,0 +1,34 @@
+body{
+    background: #f1f3fe;
+    font-family: "Comic Sans MS";
+}
+
+table{
+    margin: auto auto;
+}
+
+caption{
+    height: 30pt;
+    font-weight: bold;
+    color: #004080;
+}
+
+th{
+    text-align: center;
+    color: #4d4d4d;
+    background: #a8d3ff;
+}
+
+td{
+    text-align:justify;
+    color: #5b5b5b;
+    font-size: small;
+    vertical-align: middle; 
+}
+
+.row1{
+    background: yellowgreen;
+}
+.row2{
+    background: palevioletred;
+}
